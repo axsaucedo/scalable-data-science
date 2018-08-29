@@ -1,0 +1,840 @@
+<!-- .slide: data-background="images/network-background.jpg" class="background" -->
+
+<h2>Scalable Data Science</h2>
+<h4>Deep dive scaling your data science capabilities</h4>
+<p>
+  <br />
+  <br />
+    Alejandro Saucedo <br/><br/>
+    <a href="http://twitter.com/AxSaucedo">@AxSaucedo</a><br/>
+    <a href="http://linkedin.com/in/AxSaucedo">in/axsaucedo</a><br/>
+  <br />
+</p>
+<p>
+
+[NEXT]
+<!-- .slide: data-background="images/network-background.jpg" class="background" -->
+
+<h2>Scalable Data Science</h2>
+
+<h4>Deep dive scaling your data science capabilities</h4>
+
+<table class="bio-table">
+  <tr>
+    <td style="float: left">
+        ![portrait](images/alejandro.jpg)
+        <br>
+        <font style="font-weight: bold; color: white">Alejandro Saucedo</font>
+        <br>
+        <br>
+    </td>
+    <td style="float: left; color: white; font-size: 0.7em;">
+
+        Head of Solutions Engineering/Science
+        <br>
+        <a style="color: cyan" href="http://e-x.io">Eigen Technologies</a
+        <br>
+        <br>
+        <br>
+        Chairman
+        <br>
+        <a style="color: cyan" href="http://ethical.institute">The Institute for Ethical AI & ML</a>
+        <br>
+        <br>
+        Member, Broader AI Expert Group
+        <br>
+        <a style="color: cyan" href="#">European Commission</a>
+        <br>
+        <br>
+        Advisory group
+        <br>
+        <a style="color: cyan" href="http://teensinai.com">TeensInAI</a>
+        <br>
+
+    </td>
+  </tr>
+  <tr>
+  </tr>
+</table>
+
+### <a style="color: cyan" href="#">Contact me at: a@e-x.io</a>
+  
+
+    
+[NEXT]
+<!-- .slide: data-background="images/network-background.jpg" class="background smallquote" -->
+
+## Today: Scaling Data Science
+
+> Motivations & challenges
+> <br>
+> <br>
+> Best practices
+>
+> Tools and approaches
+>
+> Case study
+
+### The big picture
+
+[NEXT]
+## #LetsDoThis
+
+[NEXT SECTION]
+# 1. Motivations
+
+[NEXT]
+As you may have heard in the conference
+
+![classification_large](images/mltemp1.png)
+
+Data science can be generalised into two workflows
+
+[NEXT]
+
+If we have a small team of data scientists...
+
+[NEXT]
+
+## We face small number of issues
+* Small number of models to maintain
+* Data scientists have knowledge of models in their head
+* They each have their methods for tracking their progress
+    * Some use iPhython Notebooks
+    * Some just put the data in different folders
+
+[NEXT]
+
+### It all works relatively well!
+
+[NEXT]
+
+As our data science requirements grow however...
+## We face new issues
+
+[NEXT]
+
+#### Increasing number of models developed and deployed
+
+* Keep track of what version exists in each environment
+* Deploying new models gets increasingly complex
+* There might be disruption or downtime that may not be tolerable
+
+[NEXT]
+#### Hard to keep track of changes to new models
+
+* People loose track of what data was used to train which model
+* Reproducibility becomes harder
+
+[NEXT]
+#### Complexity increases orchestrating data flow
+
+* We may have an increasing number of pre/post processing jobs
+* Data ingestion and processing gets more complex
+* Tracking what is running where is harder
+ 
+[NEXT]
+#### When stuff goes wrong it's hard to trace back
+
+* Becomes a cat-and-mouse game
+* Data scientists say it's a bug in the pipelines
+* Data engineers say it's something wrong in the models
+
+[NEXT]
+#### Each data scientist has their own set of tools
+
+* Some love R
+* Some love Python
+* Some love Spark
+
+[NEXT]
+
+As we can see a lot of complexities arise...
+
+[NEXT]
+
+# Thankfully (maybe?)
+Many of our fellow colleagues have faced these issues for a long time
+There are tons of tools out there
+
+## A LOT of tools
+
+[NEXT]
+
+### The number of tools out there might be overwhelming
+
+That's why we're going to break it down
+
+
+[NEXT SECTION]
+
+# 2. Scalability Concepts
+
+[NEXT]
+
+As any technical function grows
+
+So does their infrastructural complexity
+
+[NEXT]
+
+This also opens up the new roles that we keep hearing about
+
+[NEXT]
+
+#### Data Scientists 
+In charge of development of models
+<br>
+<br>
+
+#### Data Engineers 
+In charge of development of data pipelines
+<br>
+<br>
+
+#### DevOps / DataOps / MLOps Engineers (¿?)
+In charge of productionisation of models, data pipelines & products
+
+[NEXT]
+
+But why do we need this?
+
+[NEXT]
+
+
+### Infrastructure complexity increases...
+
+![classification_large](images/mltemp4.png)
+
+[NEXT]
+
+### Let's break this down
+
+[NEXT]
+
+## Model & Data Versioning
+
+![classification_large](images/mltemp6.png)
+
+The age-old question of reproducibility in data science
+
+[NEXT]
+
+This is a very interesting challenge
+
+With a huge number of potential solutions
+
+[NEXT]
+
+### Data and config at each stage
+
+![classification_large](images/mltemp2.png)
+
+Each stage has config, as well as specific data in/out 
+
+[NEXT]
+
+## Replicatable state
+
+<div style="float: left; width: 33%">
+<h4>Data in </h4>
+
+<pre><code class="code python hljs" style="font-size: 0.6em; line-height: 1em">
+$ cat data-input.csv
+
+>            Date    Open    High     Low   Close     Market Cap
+> 1608 2013-04-28  135.30  135.98  132.10  134.21  1,500,520,000
+> 1607 2013-04-29  134.44  147.49  134.00  144.54  1,491,160,000
+> 1606 2013-04-30  144.00  146.93  134.05  139.00  1,597,780,000
+
+</code></pre>
+</div>
+
+<div style="float: left; width: 33%">
+<h4>Code / Config</h4>
+<pre><code class="code python hljs" style="font-size: 0.6em; line-height: 1em">
+$ cat feature-extractor.py
+
+> def open_norm_feature_extractor(df):
+>     feature = some_lib.get_open(df)
+>     return feature
+
+
+</code></pre>
+</div>
+
+<div style="float: left; width: 33%">
+<h4>Data out</h4>
+<pre><code class="code python hljs" style="font-size: 0.6em; line-height: 1em">
+$ cat data-output.csv
+
+>   Open 
+>   0.57 
+>   0.59 
+>   0.47 
+
+
+</code></pre>
+</div>
+
+If we can abstract and store these representations
+
+We are able to recreate that step in isolation
+
+
+[NEXT]
+
+## Replicatable Data Science
+
+
+![classification_large](images/mltemp5.png)
+
+Similarly, if we are able to replicate each individual step
+
+We would be able to replicate our end-to-end flows
+
+_note_
+Similarly we can store the accuracy of the model
+Together with all the parameters that were used to compute it
+
+[NEXT]
+
+There are multiple levels of abstraction
+
+towards model and data versionining
+
+and there are multiple approaches
+
+[NEXT]
+
+But the ultimate objective is the same:
+
+# Reproducibility
+
+[NEXT]
+
+This is important as it enables for:
+* Traceablility when debugging for errors
+* Transparency on the steps that lead to results
+* Modularity of componets so they can be reused
+* Abstraction to support multiple libraries 
+
+[NEXT]
+
+### This challenge has many layers
+
+And many players tackle it in different ways
+
+### We'll dive into the path towards standardisation
+
+When we deep dive into the solutions out there
+
+[NEXT]
+
+### Model Serving / Production
+
+![classification_large](images/mltemp3.png)
+
+This section has quite a lot to unpack
+
+we'll try to cover some of the key concepts
+
+[NEXT]
+
+### Model Deployment Orchestration
+
+This is basically the ability to serve new models into production
+
+Similar to CI/CD in software development
+
+## But different...
+
+[NEXT]
+
+Why different?
+
+As per Andrej Karpathy, on Software 2.0, with machine learning:
+
+Our approach is to specify some goal on the behavior of a desirable program (e.g., “satisfy a dataset of input-output pairs of examples,” or, “win a game of Go”), write a rough skeleton of the code (e.g., a neural net architecture) that identifies a subset of program space to search, and use the computational resources at our disposal to search this space for a program that works.
+
+
+
+
+
+[NEXT SECTION]
+
+# 4. Smart Data Pipelines
+
+[NEXT]
+The Crypto-ML has now an 
+### exponentially increasing 
+amount of 
+## internal/external use-cases
+
+Their datapipeline is getting unmanagable!
+
+[NEXT]
+
+## They also realised ML is the tip of the iceberg
+![distributed_architecture](images/mlecosystem.png)
+
+People forget only a small fraction of real-world machine learning is composed of actual ML code
+
+[NEXT]
+## Growing data flow complexity
+
+* There is a growing need to pull data from different sources
+* There is a growing need to pre- and post-process data
+* As complexity increases tasks depending on others
+* If a task fails we wouldn't want to run the children tasks
+* Some tasks need to be triggered chronologically
+* Data pipelines can get quite complex 
+* Having just celerized tasks ran by Linux chronjob gets messy
+<br>
+<br>
+
+[NEXT]
+# They want to go from here
+
+![cron_tab](images/crontab.jpg)
+
+[NEXT]
+# To here
+
+![airflow](images/airflow.png)
+
+[NEXT]
+## But before jumping in
+
+We'll clarify the distinction between the terms:
+* Data pipelines
+* Machine Learning pipelines
+
+<br>
+### Providing a breakdown of definitions
+
+[NEXT]
+
+## Machine Learning Pipelines
+
+are a subset of 
+
+# Data Pipelines
+
+[NEXT]
+
+## Generalising Data Pipelines
+
+<video src="images/automation.mp4" data-autoplay="" loop="" playsinline="">
+</video>
+<!-- .element: style="margin: 10px 0 10px 0" -->
+
+#### Taking data from somewhere
+#### Doing something with it
+#### Putting results back somewhere else
+
+
+
+[NEXT]
+
+### "Data Pipelines" often encompass:
+* Scalability
+* Monitoring
+* Latency
+* Versioning
+* Testing
+
+<br>
+#### Thankfully we have tools to help us
+
+[NEXT]
+#### Introducing 
+# Airflow
+
+![airflow](images/airflow.jpeg)
+
+The swiss army knife of data pipelines
+
+
+[NEXT]
+# What Airflow is NOT
+
+[NEXT]
+# What Airflow is NOT
+## ❌ Airflow is far from perfect 
+
+...but the best out there
+
+[NEXT]
+# What Airflow is NOT
+## ❌ It's not a Lambda/FaaS framework
+
+...although it could be programmed to be
+
+[NEXT]
+# What Airflow is NOT
+## ❌ Is not extremely mature 
+
+...hence it's in Apache "Incubation"
+
+[NEXT]
+# What Airflow is NOT
+## ❌ It's not fully stable
+
+...version 2.0 is being developed
+
+[NEXT]
+# What Airflow is NOT
+## ❌ Airflow is not a data streaming solution 
+
+...you could augment with STORM / Spark Streaming
+
+[NEXT]
+
+## Let's now dive into Airflow
+
+[NEXT]
+<!-- .slide: data-transition="fade-in fade-out" data-background="images/partistat.png" class="smallquote" style="color: black !important" -->
+# Airflow in brief
+* A data pipeline framework 
+* Written in Python 
+* It has an active community
+* Provides a UI for management
+
+[NEXT]
+## DAGs are Airflow's core
+
+![cron_tab](images/graphview.png)
+
+## DAG = Directed Acyclic Graphs
+
+These are ETL operations that are executed in order
+and only execute if the previous ones are succesful
+
+[NEXT]
+
+### DAGs are defined programatically
+
+These contain the execution order for operators
+
+``` python
+# Define DAG
+DAG = DAG(dag_id="test",    
+            start_date=datetime.now(), 
+            schedule_interval="@once")
+
+# Define operators
+operator_1 = ...
+operator_2 = ...
+operator_3 = ...
+
+# Define order
+operator_1 >> operator_2 >> operator_3
+```
+
+As well as the schedule for execution
+
+
+[NEXT]
+## DAGs overview in list screen
+View all DAGs, together with the schedule of execution
+
+![cron_tab](images/scheduler.png)
+
+As well as the recent status of executed DAGs
+
+
+[NEXT]
+## Detailed DAG View
+
+![cron_tab](images/treeview.png)
+
+[NEXT]
+
+## Operators are easy to define
+
+<pre><code class="code python hljs" style="font-size: 1em; line-height: 1em; ">
+# Create python functions
+DAG = ...
+
+def crypto_prediction():
+    data = ... # gather some data
+    prediction = ... # run some prediction
+    db.store(prediction) # store prediction
+
+# Define Operators
+crypto_task = PythonOperator(
+    task_id='pull_task',
+    python_callable=crypto_prediction, # <- Add python function
+    dag=DAG)
+
+</code></pre>
+
+Here is an example of a PythonOperator
+
+
+[NEXT]
+
+## Airflow provides default operators
+
+![cron_tab](images/airflowoperators.png)
+
+You can use things like BranchOperator, SensorOperator, etc
+
+
+
+[NEXT]
+
+## Passing Data downstream
+
+We can pass data across operators downstream with xcom
+
+<pre><code class="code python hljs" style="font-size: 0.8em; line-height: 1em; ">
+# Create python functions
+def push_function():
+    return ['a', 'b', 'c']
+
+def pull_function(**kwargs):
+    params = kwargs['ti'].xcom_pull(task_ids='push_task')
+    print(params)
+
+# Define Operators
+pull_task = PythonOperator(
+    task_id='pull_task',
+    python_callable=pull_function,
+    provide_context=True, # <- we pass the context
+    dag=DAG)
+
+push_task = PythonOperator(
+    task_id='push_task',
+    python_callable=push_function,
+    provide_context=True, # <- again we pass the context
+    dag=DAG)
+
+# DAG order definition
+push_task >> pull_task
+
+</code></pre>
+
+This is useful to hold state data, such as a DB index IDs
+
+[NEXT]
+
+## Visualise downstream params
+
+![cron_tab](images/xcom.png)
+
+You can see XCom parameters for each operator run
+
+
+
+[NEXT]
+## Airflow is modular
+
+Modular separation of code, operators, dags, subdags, etc
+
+![cron_tab](images/subdags.png)
+<!-- .element: style="width: 70%" -->
+
+This allows for better testing and re-usability
+
+[NEXT]
+## Airflow is extensible 
+
+Airflow also allows you to write your own custom "plugins"
+
+<pre><code class="code python hljs" style="font-size: 0.8em; line-height: 1em; ">
+from util import load, dump
+class AirflowPlugin(object):
+    # The name of your plugin (str)
+    name = None
+    # A list of class(es) derived from BaseOperator
+    operators = []
+    # A list of class(es) derived from BaseHook
+    hooks = []
+    # A list of class(es) derived from BaseExecutor
+    executors = []
+    # A list of references to inject into the macros namespace
+    macros = []
+    # A list of objects created from a class derived
+    # from flask_admin.BaseView
+    admin_views = []
+    # A list of Blueprint object created from flask.Blueprint
+    flask_blueprints = []
+    # A list of menu links (flask_admin.base.MenuLink)
+    menu_links = []
+
+</code></pre>
+
+It's possible to write your own Operators, hooks, etc
+
+[NEXT]
+If that's not awesome enough...
+
+[NEXT]
+It uses celery as task runner
+
+![celery_celery](images/celery.jpg)
+
+As well as ability to use different backends
+
+
+
+[NEXT]
+## The Crypto-ML Usecase
+
+Crypto-ML wants a workflow where:
+
+* They pull crypto-data every day
+* Data is transformed & standardised
+* Once ready, a prediction should be computed
+* Prediction should be stored in DB
+* If relevant, a trade should be executed
+
+[NEXT]
+
+Let's break this down into Airflow terminology
+
+[NEXT]
+## Sub-DAG for each crypto
+
+![cron_tab](images/cryptodag-2.png)
+
+[NEXT]
+## DAG for all daily crypto job
+
+![cron_tab](images/cryptodag.png)
+
+
+
+[NEXT]
+## The Crypto-ML Usecase
+
+Scheduled task:
+* Operator: polls new Crypto-data + triggers each sub-dags
+
+Sub-DAG:
+* Operator: Transforms the data
+* Operator: Sends data to the crypto-prediction engine
+* Sensor: Polls until the prediction is finished
+* Branch: Modifies data & based on rules triggers action
+    * Operator: Stores data in database
+    * Operator: Sends request to trade
+
+
+[NEXT]
+Success!
+
+![weight_matrix](images/sv.gif)
+
+
+
+[NEXT]
+# Go check it out!
+
+## [airflow.apache.org](https://airflow.apache.org/)
+
+
+[NEXT]
+
+## Airflow Alternatives
+* Luigi
+* Pinball
+* Seldon Core
+
+<br>
+## Other similar (but different)
+* Dask
+* Apache Kafka
+
+[NEXT]
+
+### Special Mentions
+* Docker
+* Kubernetes
+
+<br>
+#### Implementations are in the codebase
+
+
+[NEXT]
+### What's next for Crypto-ML?
+
+As with every other tech startup
+
+the roller-coaster keeps going!
+
+
+
+[NEXT SECTION]
+<!-- .slide: data-background="images/network-background.jpg" class="background smallest" -->
+
+### But for us?
+
+> Got an overview in scaling data pipelines
+> <br>
+> <br>
+> Airflow components (Celery, ML, etc)
+>
+> Difference between ML & Data Pipelines
+>
+> Overview of Airflow + Usecase
+
+### The big picture
+
+
+[NEXT]
+<!-- .slide: data-background="images/network-background.jpg" class="background" -->
+### Code
+https://github.com/axsauze/crypto-ml
+
+### Slides
+http://github.com/axsauze/industrial-airflow
+
+[NEXT]
+<!-- .slide: data-background="images/network-background.jpg" class="background" -->
+
+<h2>Scalable Data Science</h2>
+
+<table class="bio-table">
+  <tr>
+    <td style="float: left">
+        ![portrait](images/alejandro.jpg)
+        <br>
+        <font style="font-weight: bold; color: white">Alejandro Saucedo</font>
+        <br>
+        <br>
+    </td>
+    <td style="float: left; color: white; font-size: 0.7em;">
+
+        <br>
+        CTO
+        <br>
+        <a style="color: cyan" href="http://e-x.io">Exponential Technologies</a>
+        <br>
+        <br>
+        Chairman
+        <br>
+        <a style="color: cyan" href="http://ethical.institute">The Institute for Ethical AI & ML</a>
+        <br>
+        <br>
+        Fellow (AI, Data & ML)
+        <br>
+        <a style="color: cyan" href="#">The RSA</a>
+        <br>
+        <br>
+        Advisor
+        <br>
+        <a style="color: cyan" href="http://teensinai.com">TeensInAI.com initiative</a>
+        <br>
+
+    </td>
+  </tr>
+  <tr>
+  </tr>
+</table>
+
+### <a style="color: cyan" href="#">Contact me at: a@e-x.io</a>
+
+
+
