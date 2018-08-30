@@ -29,7 +29,7 @@
     </td>
     <td style="float: left; color: white; font-size: 0.7em;">
 
-        Head of Solutions Eng./Science
+        Head of Solutions Engineering
         <br>
         <a style="color: cyan" href="http://e-x.io">Eigen Technologies</a
         <br>
@@ -67,7 +67,7 @@
 > <br>
 > Working in Finance, Legal and Insurance
 >
-> Recently raised 17.5m to expand operations
+> Recently raised $17.5m to expand operations
 >
 > Using probabilistic models for text analysis
 
@@ -260,7 +260,7 @@ This is a very interesting challenge
 
 With a huge number of creative attempts
 
-But all that agree on a set of core concepts
+But all agree on a set of core concepts
 
 [NEXT]
 
@@ -331,6 +331,11 @@ We can abstract our entire pipeline and data flows
 _note_
 Similarly we can store the accuracy of the model
 Together with all the parameters that were used to compute it
+
+[NEXT]
+
+TODO
+Choosing the level of abstraction that you want to go - abastracting data vs abstracting all the way to the model
 
 [NEXT]
 
@@ -406,7 +411,7 @@ Let's see how this differs
 <h3>Short term</h3>
 
 <ul>
-    <li>Anomalities </li>
+    <li>Anomalies </li>
     <li>Bias</li>
     <li>Comp. vs prev model</li>
 </ul>
@@ -496,6 +501,11 @@ And dynamic services that provide different functionality
 
 We need to be able to allocate the right resources
 
+
+[NEXT]
+
+## Why does this matter?
+
 [NEXT]
 
 #### Resource allocation Makes a difference
@@ -519,6 +529,12 @@ To auto-scale
 ![classification_large](images/arch1.png)
 
 To even serverless
+
+[NEXT]
+
+## An operating system for your ML
+
+
 
 [NEXT]
 
@@ -553,6 +569,13 @@ with the tools available for ML Operations
 
 <br>
 #### https://github.com/axsauze/awesome-machine-learning-operations
+
+[NEXT]
+
+### Small disclaimer
+
+At Eigen we have built our own frameworks internally, so we don't currently use these frameworks
+
 
 [NEXT]
 
@@ -696,7 +719,11 @@ sklearn2pmml(estimator=clf,
 
 [NEXT]
 
-## All-in-one Model Versioning 
+# Part II
+## Model Deployment Orchestration
+
+[NEXT]
+
 # Pachyderm 
 
 ![classification_large](images/pachyderm.png)
