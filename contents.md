@@ -274,6 +274,9 @@ Each stage has code/config, as well as specific data in/out
 
 ## Abstracting individual steps
 
+![classification_large](images/mlstep.png)
+
+
 <div style="float: left; width: 33%">
 <h4>Data in </h4>
 
@@ -311,13 +314,8 @@ $ cat data-output.csv
 >   0.59 
 >   0.47 
 
-
 </code></pre>
 </div>
-
-If we can abstract and store these representations
-
-We are able to recreate that step in isolation
 
 
 [NEXT]
