@@ -340,7 +340,7 @@ This gets us closer to our ultimate objective:
 ## Reproducibility enables for
 * Traceablility when debugging for errors
 * Transparency on the steps that lead to results
-* Modularity of componets so they can be reused
+* Modularity of components so they can be reused
 * Abstraction to support multiple libraries 
 * Robustness if we need to go back to a previous release
 
@@ -516,7 +516,7 @@ To auto-scale
 
 ![classification_large](images/arch1.png)
 
-To even serverless
+Even to serverless
 
 
 [NEXT]
