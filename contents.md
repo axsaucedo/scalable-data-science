@@ -560,6 +560,36 @@ with the tools available for ML Operations
 
 [NEXT]
 
+## PMML
+
+The Predictive Model Markup Language standard in XML
+
+A standard way of representing machine learning model pipelines for storage
+
+Several renowned systems actually use PMML to enable import/export of models across platforms
+
+[NEXT]
+## PMML
+
+#### Exporting to PMML using sklearn2pmml
+```
+from sklearn import datasets, tree
+iris = datasets.load_iris()
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(iris.data, iris.target)
+
+from sklearn_pandas import DataFrameMapper
+default_mapper = DataFrameMapper(
+    [(i, None) for i in iris.feature_names + ['Species']])
+
+from sklearn2pmml import sklearn2pmml
+sklearn2pmml(estimator=clf,
+             mapper=default_mapper,
+             pmml="D:/workspace/IrisClassificationTree.pmml")
+```
+
+[NEXT]
+
 ## Data Version Control (DVC)
 
 A full-on Open-source Version Control System for Data Science Projects
@@ -573,6 +603,8 @@ config and code through a version control system
 <div class="right-col">
 ![classification_large](images/dvc.png)
 </div>
+
+
 
 [NEXT]
 
@@ -646,6 +678,133 @@ This allows for exploration of models that have been run
 
 [NEXT]
 
+# Pachyderm 
+
+![classification_large](images/pachyderm.png)
+
+Pachyderm is an end-to-end model-versioning framework that allows for reproducible pipeline definitions.
+
+[NEXT]
+
+## Pachyderm
+
+Pachyderm consists of three main components:
+* Data "repositories"
+* Processing steps wrapped in docker containers
+* Pipelines that connect steps and data repositories
+
+<br>
+#### Each step contains an input and output of data
+
+[NEXT]
+
+## Pachyderm Example
+
+Building a training pipeline for iris classifier
+
+Using sklearn svm, output a training model
+
+
+[NEXT]
+
+## Create a repo and add data
+
+Create a repo
+```
+$ pachctl create-repo training
+$ pachctl list-repo
+NAME                CREATED             SIZE
+training            2 minutes ago       0 B
+```
+
+Commit data (with -c flag) into the repository
+```
+$ pachctl put-file training master -c -f data/iris.csv
+```
+
+[NEXT]
+
+## Build your docker image
+
+
+<div class="left-col">
+<h4>pytrain.py</h4>
+
+<pre><code class="code python hljs" style="font-size: 0.6em; line-height: 1em"># pytrain.py
+
+...import dependencies
+ 
+cols = [ "Sepal_Length", "Sepal_Width", "Petal_Length", "Petal_Width", "Species" ]
+features = [ "Sepal_Length", "Sepal_Width", "Petal_Length", "Petal_Width" ]
+
+# Load training data
+irisDF = pd.read_csv(os.path.join("/pfs/training", 
+    "iris.csv"), names=cols)
+
+svc = svm.SVC(kernel='linear', C=1.0).fit(
+    irisDF[features], irisDF["Species"])
+
+# Save model to pachyderm /pfs/out
+joblib.dump(svc, os.path.join("/pfs/out", 'model.pkl'))
+
+</code></pre>
+</div>
+
+
+<div class="right-col">
+<h4>Dockerfile</h4>
+
+<pre><code class="code python hljs" style="font-size: 1em; line-height: 1em">
+FROM ubuntu:14.04
+
+...install dependencies 
+
+# Add our own code.
+WORKDIR /code
+ADD pytrain.py /code/pytrain.py
+
+
+</code></pre>
+</div>
+
+[NEXT]
+
+## Define computational pipeline
+
+```
+{
+  "pipeline": {
+    "name": "model"
+  },
+  "transform": {
+    "image": "pachyderm/iris-train:python-svm",
+    "cmd": ["python3", "/code/pytrain.py",]
+  },
+  "input": {
+    "atom": {
+      "repo": "training",
+      "glob": "/"
+    }
+  }
+}
+```
+
+[NEXT]
+
+## Reproducible pipeline
+
+![classification_large](images/iris.png)
+
+# Now what?
+
+
+[NEXT]
+
+# Part II
+## Model Deployment Orchestration
+
+[NEXT]
+
 ## MLeap
 
 Diving one level deeper into serialization of models
@@ -655,71 +814,40 @@ Diving one level deeper into serialization of models
 </div>
 <div class="right-col">
 <br>
-Standardisation of pipeline and model serialization for Spark, Tensorflow and sklearn built by Combust.ml
+MLeap is used in open source projects that look to abstract the serialisation, execution of various machine learning libraries.
 </div>
 
-<br style="clear: both">
-<br style="clear: both">
-MLeap is used in open source projects that look to abstract the storage, deployment and execution of various machine learning libraries.
-
-
 [NEXT]
 
-## PMML
-
-The Predictive Model Markup Language standard in XML
-
-A standard way of representing machine learning model pipelines for storage
-
-Several renowned systems actually use PMML to enable import/export of models across platforms
-
-[NEXT]
-## PMML
-
-#### Exporting to PMML using sklearn2pmml
+## MLeap Serving
+Run the server
 ```
-from sklearn import datasets, tree
-iris = datasets.load_iris()
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(iris.data, iris.target)
-
-from sklearn_pandas import DataFrameMapper
-default_mapper = DataFrameMapper(
-    [(i, None) for i in iris.feature_names + ['Species']])
-
-from sklearn2pmml import sklearn2pmml
-sklearn2pmml(estimator=clf,
-             mapper=default_mapper,
-             pmml="D:/workspace/IrisClassificationTree.pmml")
+$ docker run \ 
+    -p 65327:65327 \
+    -v /tmp/models:/models \
+    combustml/mleap-serving:0.9.0
+```
+Load a model
+```
+curl -XPUT -H "content-type: application/json" \
+  -d '{"path":"/models/<my model>.zip"}' \
+  http://localhost:65327/model
 ```
 
 [NEXT]
 
-# Part II
-## Model Deployment Orchestration
+## MLeap Optimized bundles
+
+![classification_large](images/mleapbundle.png)
+
 
 [NEXT]
 
-# Pachyderm 
+## Seldon-core
 
-![classification_large](images/pachyderm.png)
+![classification_large](images/seldon1.png)
 
-Pachyderm is an end-to-end model-versioning framework that allows for high-level dynamic pipeline definitions.
-
-[NEXT]
-
-## Pachyderm
-
-The Pachyderm frameowrk allows the users to define the data flows via JSON, and the framework takes care of data / code / configuration versioning 
-
-_note_
-# Part II 
-## Model Deployment Orchestration
-
-# Seldon Core
-
-
-
+"Machine Learning Deployment for Enterprise"
 
 
 [NEXT SECTION]

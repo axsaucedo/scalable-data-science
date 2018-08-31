@@ -51,6 +51,7 @@ node_modules/
 jspm_packages/
 
 tags
+tags*
 
 # Typescript v1 declaration files
 typings/
