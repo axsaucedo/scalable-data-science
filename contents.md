@@ -16,7 +16,7 @@
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
 <h2>Scalable Data Science</h2>
-<h4>The state of machine learning operations in 2018</h4>
+<h4>The state of DataOps / MLOps in 2018</h4>
 
 <table class="bio-table">
   <tr>
@@ -77,7 +77,7 @@
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background smallquote" -->
 
-## Scaling Data Science with MLOps
+## Scalable Data Science
 
 > Motivations & challenges
 > <br>
@@ -89,7 +89,7 @@
 > Closing words
 >
 
-####  Slides at: <a style="color: cyan" href="#">bit.ly/awesome-mlops</a>
+####  Slides at: <a style="color: cyan" href="#">bit.ly/scalable-data-science</a>
 
 [NEXT]
 ## #LetsDoThis
@@ -551,7 +551,7 @@ with the tools available for ML Operations
 ## Feel free to chip in!
 
 <br>
-#### https://github.com/axsauze/awesome-machine-learning-operations
+#### bit.ly/awesome-mlops
 
 [NEXT]
 
@@ -849,11 +849,39 @@ curl -XPUT -H "content-type: application/json" \
 
 "Machine Learning Deployment for Enterprise"
 
+[NEXT]
+
+![classification_large](images/seldon3.png)
+## Strong focus on model orchestration
+![classification_large](images/seldon2.png)
+
+[NEXT]
+
+### Tackling the CI/CD challenge
+![classification_large](images/cicd.png)
+
+[NEXT]
+
+### Enabling monitoring with grafana
+![classification_large](images/dashboard.png)
+
+[NEXT]
+
+# What about us?
+### We built our infrastructure:
+* Nightly accuracy monitoring framework
+* Internal JSON standard for model versioning
+* Distributed manager-worker rabbitmq architecture
+* Internal machine learning data Labelling tools
+
+[NEXT]
+
+# What about you?
 
 [NEXT SECTION]
 <!-- .slide: data-background="images/network-background.jpg" class="background smallest" -->
 
-## Scaling Data Science with MLOps
+## Scalable Data Science
 
 > Motivations & challenges
 > <br>
@@ -871,16 +899,16 @@ curl -XPUT -H "content-type: application/json" \
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 ### Scalable Data Science
-https://github.com/axsauze/scalable-data-science
+https://bit.ly/scalable-data-science
 
-### Awesome MLOps
-http://github.com/axsauze/awesome-machine-learning-operations
+### Awesome MLOps List
+http://bit.ly/awesome-mlops
 
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
 <h2>Scalable Data Science</h2>
-<h4>The state of machine learning operations in 2018</h4>
+<h4>The state of DataOps / MLOps in 2018</h4>
 
 <table class="bio-table">
   <tr>
