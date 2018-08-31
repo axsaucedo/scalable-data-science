@@ -65,11 +65,11 @@
 > Building front-/back-office automation ML
 > <br>
 > <br>
+> Using probabilistic models for text analysis
+>
 > Working in Finance, Legal and Insurance
 >
 > Recently raised $17.5m to expand operations
->
-> Using probabilistic models for text analysis
 
 ### PS. We are hiring -> <a href="http://eigentech.com">eigentech.com</a>
 
@@ -79,15 +79,13 @@
 
 ## Scalable Data Science
 
-> Motivations & challenges
+> Motivations
 > <br>
 > <br>
-> Concepts & Best Practices
->
-> Frameworks & libraries
->
-> Closing words
->
+> Concepts
+> <br>
+> <br>
+> Existing Tools
 
 ####  Slides at: <a style="color: cyan" href="#">bit.ly/scalable-data-science</a>
 
@@ -95,7 +93,7 @@
 ## #LetsDoThis
 
 [NEXT SECTION]
-# 1. Motivations & Challenges
+# 1. Motivations
 
 [NEXT]
 Data science generalised in two workflows
@@ -127,18 +125,35 @@ As our data science requirements grow...
 ## We face new issues
 
 [NEXT]
-#### Complexity increases orchestrating data flow
-
+#### Increasing complexity in flow of data
 <div class="left-col">
     <ul>
-        <li>Increasing data processing workflows</li>
-        <li>Changes on data aren't tracked</li>
-        <li>Scheduling becomes increasingly complex</li>
+        <li>Large number of data processing workflows</li>
+        <li>Data is modified without stardardised trace</li>
+        <li>Managing complexity of flows and scheduling becomes unmanagable</li>
     </ul>
 </div>
 <div class="right-col">
 ![classification_large](images/crontab.jpg)
 </div>
+
+[NEXT]
+#### Each data scientist has their own set of tools
+
+<div class="left-col">
+    <ul>
+        <li>Some ♥ Tensorflow</li>
+        <li>Some ♥ R</li>
+        <li>Some ♥ Spark</li>
+    </ul>
+</div>
+<div class="right-col">
+![classification_large](images/mlibs.jpg)
+</div>
+
+<br style="clear:both">
+### Some ♥ all of them
+
 
 [NEXT]
 
@@ -149,7 +164,7 @@ As our data science requirements grow...
 </div>
 <div class="right-col">
     <ul>
-        <li>Different model versions running in each environment</li>
+        <li>Different model versions running in different environments</li>
         <li>Deploying and reverting models gets increasingly complex</li>
     </ul>
 </div>
@@ -170,56 +185,13 @@ As our data science requirements grow...
 </div>
 
 [NEXT]
-#### Each data scientist has their own set of tools
 
-<div class="left-col">
-    <ul>
-        <li>Some ♥ R</li>
-        <li>Some ♥ Python</li>
-        <li>Some ♥ Spark</li>
-    </ul>
-</div>
-<div class="right-col">
-![classification_large](images/mlibs.jpg)
-</div>
-
-<br style="clear:both">
-### Some ♥ all of them
-
-[NEXT]
-
-As we can see a lot of complexities arise...
-
-[NEXT]
 
 # Luckily for us
 Many fellow colleagues have faced these issues for a while
 
-Allowing us to gather a set of best practices
+and an active problem that many people are trying to address
 
-[NEXT SECTION]
-
-# 2. Concepts 
-
-[NEXT]
-
-### As technical functions grow...
-
-![classification_large](images/mltemp1.png)
-
-[NEXT]
-
-### So does their complexity
-
-![classification_large](images/mlops1.png)
-
-[NEXT]
-
-### The 2 principles of ML-Ops
-* Reproducibility
-* Orchestration
-
-![classification_large](images/mlops2.png)
 
 [NEXT]
 
@@ -238,6 +210,35 @@ In charge of productionisation of models, data pipelines & products
 
 [NEXT]
 
+Let's get a deeper understanding
+
+
+[NEXT SECTION]
+
+# 2. Concepts 
+
+[NEXT]
+
+### As your technical functions grow...
+
+![classification_large](images/mltemp1.png)
+
+[NEXT]
+
+### So should your infrastructure
+
+![classification_large](images/mlops1.png)
+
+[NEXT]
+
+### The 2 principles of ML-Ops
+* Reproducibility
+* Orchestration
+
+![classification_large](images/mlops2.png)
+
+[NEXT]
+
 Let's break down the two general principles
 
 [NEXT]
@@ -248,14 +249,6 @@ Let's break down the two general principles
 ![classification_large](images/mltemp6.png)
 
 The age-old question of reproducibility in data science
-
-[NEXT]
-
-This is a very interesting challenge
-
-With a huge number of creative attempts
-
-But all agree on a set of core concepts
 
 [NEXT]
 
@@ -486,7 +479,7 @@ It's basically an operating system kernel
 
 where physical resources have to be abstracted
 
-and the "software" can (one or many) of:
+and the "software" can be:
 * An ETL framework
 * A HDFS-based service 
 * A Kubernetes cluster
@@ -539,15 +532,6 @@ So now we understand some of the implications
 
 [NEXT]
 
-Let's have a look at what are some of the tools that are available
-
-in the world of machine learning operations
-
-and then let's then learn how these all fit together
-
-
-[NEXT]
-
 I'm putting together a list in Github on
 
 # "Awesome MLOps"
@@ -557,7 +541,7 @@ with the tools available for ML Operations
 ## Feel free to chip in!
 
 <br>
-#### bit.ly/awesome-mlops
+#### <a href="bit.ly/awesome-mlops">bit.ly/awesome-mlops</a>
 
 [NEXT]
 
@@ -569,11 +553,11 @@ Model and data versioning
 
 ## PMML
 
-The Predictive Model Markup Language standard in XML
+A standard way of representing machine learning model pipelines for storage and serialisation
 
-A standard way of representing machine learning model pipelines for storage
+<iframe src="http://dmg.org/pmml/v4-1/GeneralStructure.html" frameborder="0" style="width: 100%; height: 40vh"></iframe>
 
-Several renowned systems actually use PMML to enable import/export of models across platforms
+Several systems use it to transfer models across platforms
 
 [NEXT]
 ## PMML
@@ -681,7 +665,8 @@ This basically stores all the steps that were used, together with the results an
 
 This allows for exploration of models that have been run
 
-<iframe src="http://modeldb.csail.mit.edu:3000/projects/1/models" frameborder="0" style="width: 100%; height: 50vh"></iframe>
+<!--<iframe src="http://modeldb.csail.mit.edu:3000/projects/1/models" frameborder="0" style="width: 100%; height: 50vh"></iframe>-->
+<iframe src="https://mitdbg.github.io/modeldb/" frameborder="0" style="width: 100%; height: 50vh"></iframe>
 
 [NEXT]
 
@@ -878,10 +863,12 @@ curl -XPUT -H "content-type: application/json" \
 # What about us?
 ### We built our infrastructure:
 * Nightly accuracy monitoring framework
-* Internal JSON standard for model versioning
+* Internal JSON standard for metadata model versioning
 * Distributed manager-worker rabbitmq architecture
-* Generalised and extensible ML pipeline framework
-* Internal machine learning data Labelling tools
+* Generalised abstraction layer above ML libraries
+* SDK interface to extend pipelines 
+* End to end data pipeline framework
+* Internal machine learning data labelling tools
 
 [NEXT]
 
@@ -891,16 +878,13 @@ curl -XPUT -H "content-type: application/json" \
 <!-- .slide: data-background="images/network-background.jpg" class="background smallest" -->
 
 ## Scalable Data Science
-
-> Motivations & challenges
+> Motivations
 > <br>
 > <br>
-> Concepts & Best Practices
->
-> Frameworks & libraries
->
-> Closing words
->
+> Concepts
+> <br>
+> <br>
+> Existing Tools
 
 ####  Slides at: <a style="color: cyan" href="#">bit.ly/awesome-mlops</a>
 
