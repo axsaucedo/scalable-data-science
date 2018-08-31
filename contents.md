@@ -1,7 +1,7 @@
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
 <h2>Scalable Data Science</h2>
-<h4>The state of DataOps / MLOps operations in 2018</h4>
+<h4>The state of DataOps / MLOps in 2018</h4>
 <p>
   <br />
   <br />
@@ -308,7 +308,7 @@ $ cat data-output.csv
 
 [NEXT]
 
-<div style="position: absolute; width: 30%; left: -22%; top: -5%">
+<div style="position: absolute; width: 30%; right: 0; bottom: -5%">
 ![classification_large](images/versioning.jpg)
 </div>
 ## Going one level higher
