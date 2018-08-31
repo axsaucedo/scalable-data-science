@@ -872,6 +872,7 @@ curl -XPUT -H "content-type: application/json" \
 * Nightly accuracy monitoring framework
 * Internal JSON standard for model versioning
 * Distributed manager-worker rabbitmq architecture
+* Generalised and extensible ML pipeline framework
 * Internal machine learning data Labelling tools
 
 [NEXT]
