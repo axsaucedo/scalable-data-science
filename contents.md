@@ -115,8 +115,6 @@ If we have a small team of data scientists...
 * Small number of models to maintain
 * Data scientists have knowledge of models in their head
 * They each have their methods for tracking their progress
-    * Some use Jupyter Notebooks
-    * Some just put the data in different folders
 
 <br>
 ### It all works relatively well!
@@ -129,32 +127,31 @@ As our data science requirements grow...
 ## We face new issues
 
 [NEXT]
+#### Complexity increases orchestrating data flow
 
-#### Large number of models developed and deployed
+<div class="left-col">
+    <ul>
+        <li>Increasing data processing workflows</li>
+        <li>Changes on data aren't tracked</li>
+        <li>Scheduling becomes increasingly complex</li>
+    </ul>
+</div>
+<div class="right-col">
+![classification_large](images/crontab.jpg)
+</div>
+
+[NEXT]
+
+#### Serving models becomes increasinly harder
 
 <div class="left-col">
 ![classification_large](images/mlmodles.png)
 </div>
 <div class="right-col">
     <ul>
-        <li>Keep track of what version exists in each environment</li>
-        <li>Deploying new models gets increasingly complex</li>
-        <li>There might be disruption or downtime that may not be tolerable</li>
+        <li>Different model versions running in each environment</li>
+        <li>Deploying and reverting models gets increasingly complex</li>
     </ul>
-</div>
-
-[NEXT]
-#### Complexity increases orchestrating data flow
-
-<div class="left-col">
-    <ul>
-        <li>Increasing number of pre/post processing jobs</li>
-        <li>Data ingestion workflows growing complex</li>
-        <li>Tracking what is running where is harder</li>
-    </ul>
-</div>
-<div class="right-col">
-![classification_large](images/crontab.jpg)
 </div>
 
 [NEXT]
@@ -166,11 +163,12 @@ As our data science requirements grow...
 
 <div class="right-col">
     <ul>
-        <li>Becomes a cat-and-mouse game</li>
         <li>Data scientists say it's a bug in the pipelines</li>
         <li>Data engineers say it's something wrong in the models</li>
+        <li>Becomes a cat-and-mouse game</li>
     </ul>
 </div>
+
 [NEXT]
 #### Each data scientist has their own set of tools
 
@@ -201,11 +199,11 @@ Allowing us to gather a set of best practices
 
 [NEXT SECTION]
 
-# 2. ML-Ops Concepts 
+# 2. Concepts 
 
 [NEXT]
 
-### As any technical function grows...
+### As technical functions grow...
 
 ![classification_large](images/mltemp1.png)
 
@@ -217,15 +215,11 @@ Allowing us to gather a set of best practices
 
 [NEXT]
 
-### MLOps through 2 general principles
-
-The data science operational layer focused on:
+### The 2 principles of ML-Ops
+* Reproducibility
+* Orchestration
 
 ![classification_large](images/mlops2.png)
-
-[NEXT]
-
-Currently defining a new role within the data science teams
 
 [NEXT]
 
@@ -248,7 +242,8 @@ Let's break down the two general principles
 
 [NEXT]
 
-## Point I - Model & Data Versioning
+# Principle I
+## Model & Data Versioning
 
 ![classification_large](images/mltemp6.png)
 
@@ -320,6 +315,9 @@ $ cat data-output.csv
 
 [NEXT]
 
+<div style="position: absolute; width: 30%; left: -22%; top: -5%">
+![classification_large](images/versioning.jpg)
+</div>
 ## Going one level higher
 
 We can abstract our entire pipeline and data flows
@@ -330,10 +328,6 @@ _note_
 Similarly we can store the accuracy of the model
 Together with all the parameters that were used to compute it
 
-[NEXT]
-
-TODO
-Choosing the level of abstraction that you want to go - abastracting data vs abstracting all the way to the model
 
 [NEXT]
 
@@ -343,8 +337,7 @@ This gets us closer to our ultimate objective:
 
 [NEXT]
 
-## Reproducibility is critical
-#### It enables for:
+## Reproducibility enables for
 * Traceablility when debugging for errors
 * Transparency on the steps that lead to results
 * Modularity of componets so they can be reused
@@ -359,7 +352,8 @@ Once we have our internal representations for our models...
 
 [NEXT]
 
-### Point II - Model Deployment Orchestration
+# Principle II 
+### Model Deployment Orchestration
 
 ![classification_large](images/mltemp3.png)
 
@@ -438,25 +432,31 @@ Let's see how this differs
 
 # Compliance 
 
-### A boring word with exciting benefints
-
-<div class="left-col">
-<a href="https://www.youtube.com/watch?v=eOzl-LFqYFM" style="font-size: 0.6em">Guidelines for and properties of compliant ML</a>
-![classification_large](images/compliant-ml.png)
-<a href="https://www.youtube.com/watch?v=eOzl-LFqYFM" style="font-size: 0.6em">CNCF 2018 - Pachyderm</a>
-</div>
-
-<div class="right-col">
-<br>
-
-It's very important to know:
 <ul>
     <li>What happened</li>
     <li>When it happened</li>
     <li>Why it happened</li>
     <li>How it happened</li>
 </ul>
+
+<br>
+### A boring word with exciting benefints
+
+[NEXT]
+
+#### We Can stop praying to the demo gods
+
+<div style="width: 40%; float: left">
+![classification_large](images/programming-gods.jpg)
 </div>
+
+<div style="width: 60%; float: left">
+<a href="https://www.youtube.com/watch?v=eOzl-LFqYFM" style="font-size: 0.6em">Guidelines for and properties of compliant ML</a>
+![classification_large](images/compliant-ml.png)
+<a href="https://www.youtube.com/watch?v=eOzl-LFqYFM" style="font-size: 0.6em">CNCF 2018 - Pachyderm</a>
+</div>
+<br style="clear: both">
+
 
 [NEXT]
 
@@ -464,45 +464,35 @@ This enables the data scientists, data engineers, and devops/mlops engineers to:
 * Trace back issues
 * Debug problems
 * Report critical issues
+</div>
 
 
 [NEXT]
 
-#### It's important to be prepared
+## Computational Resource allocation
 
-<div class="left-col">
-![classification_large](images/programming-gods.jpg)
-</div>
+Services with different computational requirements
 
-<div class="right-col">
-
-<br>
-The production gods 
-<br>
-are not in our side
-
-
-### We need to be 
-### ready
-</div>
-<br style="clear: both">
-
-And our deployment infrastructure should be as well
-
-[NEXT]
-
-# Resource allocation
-
-With a compute-heavy ecosystem
-
-And dynamic services that provide different functionality
+With often complex computational graphs
 
 We need to be able to allocate the right resources
 
 
 [NEXT]
 
-## Why does this matter?
+## This is a hard problem
+
+It's basically an operating system kernel
+
+where physical resources have to be abstracted
+
+and the "software" can (one or many) of:
+* An ETL framework
+* A HDFS-based service 
+* A Kubernetes cluster
+* Any distibuted framework!
+
+
 
 [NEXT]
 
@@ -528,11 +518,6 @@ To auto-scale
 
 To even serverless
 
-[NEXT]
-
-## An operating system for your ML
-
-
 
 [NEXT]
 
@@ -544,7 +529,7 @@ So now we understand some of the implications
 
 [NEXT SECTION]
 
-# 3. ML-Ops ecosystem
+# 3. Existing Tools
 
 [NEXT]
 
@@ -567,13 +552,6 @@ with the tools available for ML Operations
 
 <br>
 #### https://github.com/axsauze/awesome-machine-learning-operations
-
-[NEXT]
-
-### Small disclaimer
-
-At Eigen we have built our own frameworks internally, so we don't currently use these frameworks
-
 
 [NEXT]
 
