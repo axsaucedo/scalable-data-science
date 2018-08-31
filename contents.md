@@ -1,7 +1,7 @@
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
 <h2>Scalable Data Science</h2>
-<h4>The state of machine learning operations in 2018</h4>
+<h4>The state of DataOps / MLOps operations in 2018</h4>
 <p>
   <br />
   <br />
@@ -502,6 +502,8 @@ and the "software" can (one or many) of:
 
 Compare traditional server allocation
 
+[source: <a href="https://algorithmia.com/">Algorithmia</a>]
+
 [NEXT]
 
 #### Resource allocation Makes a difference
@@ -510,6 +512,8 @@ Compare traditional server allocation
 
 To auto-scale 
 
+[source: <a href="https://algorithmia.com/">Algorithmia</a>]
+
 [NEXT]
 
 #### Resource allocation Makes a difference
@@ -517,6 +521,8 @@ To auto-scale
 ![classification_large](images/arch1.png)
 
 Even to serverless
+
+[source: <a href="https://algorithmia.com/">Algorithmia</a>]
 
 
 [NEXT]
@@ -555,8 +561,9 @@ with the tools available for ML Operations
 
 [NEXT]
 
-# Part I 
-## Model & Data Versioning Tools 
+# Principle I 
+## Reproducibility
+Model and data versioning
 
 [NEXT]
 
@@ -800,8 +807,9 @@ ADD pytrain.py /code/pytrain.py
 
 [NEXT]
 
-# Part II
-## Model Deployment Orchestration
+# Principle II
+## Orchestration
+Model Deployment Orchestration
 
 [NEXT]
 
