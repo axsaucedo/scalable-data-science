@@ -1,8 +1,9 @@
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
-<h2>Scalable Data Science</h2>
+<h2>Scalable Machine Learning</h2>
 <h4>The state of DataOps / MLOps in 2018</h4>
 <p>
+  <a href="">EuroSciPy 2018</a>
   <br />
   <br />
     Alejandro Saucedo <br/><br/>
@@ -15,7 +16,7 @@
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
-<h2>Scalable Data Science</h2>
+<h2>Scalable Machine Learning</h2>
 <h4>The state of DataOps / MLOps in 2018</h4>
 
 <table class="bio-table">
@@ -73,11 +74,21 @@
 
 ### PS. We are hiring -> <a href="http://eigentech.com">eigentech.com</a>
 
+
+[NEXT]
+<!-- .slide: data-background="images/network-background.jpg" class="background" -->
+### Scalable Machine Learning
+https://bit.ly/scalable-data-science
+
+### Awesome MLOps List
+http://bit.ly/awesome-mlops
+
+
     
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background smallquote" -->
 
-## Scalable Data Science
+## Scalable Machine Learning
 
 > Motivations
 > <br>
@@ -877,7 +888,7 @@ curl -XPUT -H "content-type: application/json" \
 [NEXT SECTION]
 <!-- .slide: data-background="images/network-background.jpg" class="background smallest" -->
 
-## Scalable Data Science
+## Scalable Machine Learning
 > Motivations
 > <br>
 > <br>
@@ -891,7 +902,7 @@ curl -XPUT -H "content-type: application/json" \
 
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
-### Scalable Data Science
+### Scalable Machine Learning
 https://bit.ly/scalable-data-science
 
 ### Awesome MLOps List
@@ -900,7 +911,7 @@ http://bit.ly/awesome-mlops
 [NEXT]
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
-<h2>Scalable Data Science</h2>
+<h2>Scalable Machine Learning</h2>
 <h4>The state of DataOps / MLOps in 2018</h4>
 
 <table class="bio-table">
