@@ -1,14 +1,15 @@
+
 <!-- .slide: data-background="images/network-background.jpg" class="background" -->
 
-<h2>Scalable Machine Learning</h2>
-<h4>The state of DataOps / MLOps in 2018</h4>
+<h2>scalable machine learning</h2>
+<h4>the state of dataops / mlops in 2018</h4>
 <p>
-  <a href="">EuroSciPy 2018</a>
+  <a href="">euroscipy 2018</a>
   <br />
   <br />
-    Alejandro Saucedo <br/><br/>
-    <a href="http://twitter.com/AxSaucedo">@AxSaucedo</a><br/>
-    <a href="http://linkedin.com/in/AxSaucedo">in/axsaucedo</a><br/>
+    alejandro saucedo <br/><br/>
+    <a href="http://twitter.com/axsaucedo">@axsaucedo</a><br/>
+    <a href="http://linkedin.com/in/axsaucedo">in/axsaucedo</a><br/>
   <br />
 </p>
 <p>
@@ -553,6 +554,20 @@ with the tools available for ML Operations
 
 <br>
 #### <a href="bit.ly/awesome-mlops">bit.ly/awesome-mlops</a>
+
+
+[NEXT]
+<!-- .slide: data-background="images/network-background.jpg" class="background" -->
+
+<h1><font style="color:#76f0ff">ML</font>Ops / <font style="color:#76f0ff">Data</font>Ops</h1>
+<h4>a curated list of frameworks to scale<br> your <font style="color:#76f0ff">machine learning</font> capabilities<br></h4>
+<p>
+  <br />
+  <a style="color:#76f0ff" href="">bit.ly/awesome-mlops</a>
+  <br />
+  <br />
+</p>
+<p>
 
 [NEXT]
 
